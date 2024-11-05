@@ -1,4 +1,4 @@
-using ApiItSDK;
+using lib;
 using NUnit.Framework;
 
 namespace Tests

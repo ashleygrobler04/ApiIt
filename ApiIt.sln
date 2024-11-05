@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiIt", "ApiIt\ApiIt.csproj", "{1625845E-7958-45B9-BF02-BE9E48CC3D24}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiIt", "ApiIt\ApiIt.csproj", "{1625845E-7958-45B9-BF02-BE9E48CC3D24}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{3D1F5E67-33FD-46A2-AB57-604D07AADBC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{3D1F5E67-33FD-46A2-AB57-604D07AADBC2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiItSDK", "ApiItSDK\ApiItSDK.csproj", "{7D20A11D-4684-4DF2-B008-D1F9EBAA5297}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lib", "ApiItSDK\lib.csproj", "{7D20A11D-4684-4DF2-B008-D1F9EBAA5297}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

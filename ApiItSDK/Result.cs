@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ApiItSDK
+namespace lib
 {
     public class Result<T>
     {
