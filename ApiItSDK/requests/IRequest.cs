@@ -5,11 +5,12 @@ using System.Text;
 
 using System.Threading.Tasks;
 
+using Newtonsoft.Json.Linq;
 namespace lib.requests
 {
     public interface IRequest
     {
-        Task<Result<T>> GetData<T>(string url);
+        Task<Result<JObject>> GetData(string url);
         Task<Result<T>> PostData<T>(T data, string url);
         Task<Result<T>> PutData<T>(T data, string url);
         Task<Result<T>> DeleteData<T>(string url);

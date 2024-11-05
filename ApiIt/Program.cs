@@ -10,7 +10,7 @@ namespace ApiIt
 
             var res = Console.ReadLine();
             var req = new JsonRequest(_client);
-            var msg = await req.GetData<string>("https://grpersonal.site");
+            var msg = await req.GetData("https://jsonplaceholder.typicode.com/todos/1");
             if (msg.IsSuccess)
             {
                 Console.WriteLine(msg.Data);

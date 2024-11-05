@@ -1,7 +1,8 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
 using System.Text;
-using System.Text.Json;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace lib.requests
 {
@@ -14,7 +15,7 @@ namespace lib.requests
             this._client = client;
         }
 
-        public async Task<Result<T>> GetData<T>(string url)
+        public async Task<Result<JObject>> GetData(string url)
         {
             try
             {
@@ -22,14 +23,14 @@ namespace lib.requests
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
-                    var data = JsonSerializer.Deserialize<T>(content);
-                    return Result<T>.Succeed(data);
+                    var data = JObject.Parse(content);
+                    return Result<JObject>.Succeed(data);
                 }
-                return Result<T>.Fail($"GET request failed with status {response.StatusCode}: {await response.Content.ReadAsStringAsync()}");
+                return Result<JObject>.Fail($"GET request failed with status {response.StatusCode}: {await response.Content.ReadAsStringAsync()}");
             }
             catch (Exception e)
             {
-                return Result<T>.Fail(e.Message);
+                return Result<JObject>.Fail(e.Message);
             }
         }
 
@@ -42,7 +43,7 @@ namespace lib.requests
                 if (response.IsSuccessStatusCode)
                 {
                     var responseData = await response.Content.ReadAsStringAsync();
-                    var resultData = JsonSerializer.Deserialize<T>(responseData);
+                    var resultData = JsonConvert.DeserializeObject<T>(responseData);
                     return Result<T>.Succeed(resultData);
                 }
                 return Result<T>.Fail($"POST request failed with status {response.StatusCode}: {await response.Content.ReadAsStringAsync()}");
@@ -62,7 +63,7 @@ namespace lib.requests
                 if (response.IsSuccessStatusCode)
                 {
                     var responseData = await response.Content.ReadAsStringAsync();
-                    var resultData = JsonSerializer.Deserialize<T>(responseData);
+                    var resultData = JsonConvert.DeserializeObject<T>(responseData);
                     return Result<T>.Succeed(resultData);
                 }
                 return Result<T>.Fail($"PUT request failed with status {response.StatusCode}: {await response.Content.ReadAsStringAsync()}");
@@ -81,7 +82,7 @@ namespace lib.requests
                 if (response.IsSuccessStatusCode)
                 {
                     var responseData = await response.Content.ReadAsStringAsync();
-                    var content=JsonSerializer.Deserialize<T>(responseData);
+                    var content=JsonConvert.DeserializeObject<T>(responseData);
                     return Result<T>.Succeed(content);
                 }
                 return Result<T>.Fail($"DELETE request failed with status {response.StatusCode}: {await response.Content.ReadAsStringAsync()}");
@@ -96,7 +97,7 @@ namespace lib.requests
         {
             try
             {
-                var json = JsonSerializer.Serialize(data);
+                var json = JsonConvert.SerializeObject(data);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
                 var request = new HttpRequestMessage(HttpMethod.Patch, url) { Content = content };
                 var response = await _client.SendAsync(request);
@@ -104,7 +105,7 @@ namespace lib.requests
                 if (response.IsSuccessStatusCode)
                 {
                     var responseData = await response.Content.ReadAsStringAsync();
-                    var resultData = JsonSerializer.Deserialize<T>(responseData);
+                    var resultData = JsonConvert.DeserializeObject<T>(responseData);
                     return Result<T>.Succeed(resultData);
                 }
                 return Result<T>.Fail($"PATCH request failed with status {response.StatusCode}: {await response.Content.ReadAsStringAsync()}");
