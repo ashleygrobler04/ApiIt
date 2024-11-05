@@ -6,11 +6,13 @@ namespace lib
     {
         public bool IsSuccess { get; }
         public T Data { get; }
+        public string ErrorMessage { get; set; }
 
-        public Result(bool isSuccess, T data)
+        public Result(bool isSuccess, T data, string error)
         {
             this.IsSuccess = isSuccess;
             this.Data = data;
+            this.ErrorMessage = error;
         }
 
         /// <summary>
@@ -20,7 +22,7 @@ namespace lib
         /// <returns>A Result object with the isSuccess set to true to indicate that the operation is completed. This object also contains the data, you can retreive it with Result.Data</returns>
         public static Result<T> Succeed(T data)
         {
-            return new Result<T>(true, data);
+            return new Result<T>(true, data,"");
         }
 
         /// <summary>
@@ -28,9 +30,9 @@ namespace lib
         /// </summary>
         /// <param name="data"> The data you would like to return once the operation failed.</param>
         /// <returns>A result object that has the isSuccess property set to false, indicating that the operation has failed. Contains the data for when the operation failed.</returns>
-        public static Result<T> Fail(T data)
+        public static Result<T> Fail(string error)
         {
-            return new Result<T>(false, data);
+            return new Result<T>(false, default,error);
         }
     }
 }

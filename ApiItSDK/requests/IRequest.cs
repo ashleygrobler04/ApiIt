@@ -9,10 +9,10 @@ namespace lib.requests
 {
     public interface IRequest
     {
-        Task<T> GetData<T>(string url);
-        Task PostData<T>(T data, string url);
-        Task PutData<T>(T data, string url);
-        Task DeleteData(string url);
-        Task PatchData<T>(T data, string url);
+        Task<Result<T>> GetData<T>(string url);
+        Task<Result<T>> PostData<T>(T data, string url);
+        Task<Result<T>> PutData<T>(T data, string url);
+        Task<Result<T>> DeleteData<T>(string url);
+        Task <Result<T>>PatchData<T>(T data, string url);
     }
 }
